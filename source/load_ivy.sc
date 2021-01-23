@@ -181,3 +181,4 @@ def visualizeHierarchy(gen: () => chisel3.RawModule): Unit = {
 }
 
 
+val cool = 69

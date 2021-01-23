@@ -1,0 +1,3 @@
+[nbconvert.exporters]
+scala = scala_conv:ScalaExporter
+
