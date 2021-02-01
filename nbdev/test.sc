@@ -33,6 +33,7 @@ class Add(m: ALUSkeleton) {
 class Sub(m: ALUSkeleton) {
     def sub(a: UInt, b: UInt): UInt = a - b
 }
+println("changed auto-gen file")
 
 // Cell
 class MulDiv(m: ALUSkeleton) {
@@ -48,6 +49,7 @@ implicit def includeMulDiv(m: ALUSkeleton) = new MulDiv(m)
 // Cell
 // This Operator module perform 1 type of operation depending on 'op' parameter
 class Operator(op: String) extends ALUSkeleton {
+    println("changed auto-gen file")
     op match {
         // Call on the implicit function
         case "+" => io.out := this.add(io.a, io.b)
