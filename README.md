@@ -28,4 +28,14 @@ SCALA_VERSION=2.12.10 ALMOND_VERSION=0.9.1
 
 ### Start JupyterLab
 - Making sure you are in your virtualenv then run: ```jupyter lab```
-- From here you can navigate to the Chisel notebooks.
+
+### Project Structure
+- By default, notebook source files (.ipynb) will live in the ```nbs``` folder.
+- Upon running ```notebook2script()``` the notebooks in ```nbs``` will export code to ```.sc``` files in the ```nbdev``` folder. These are auto-generated files that can be imported back into notebooks via Ammonite: For example ```import $file.MyMod, MyMod._``` imports the contents of the file ```MyMod.sc```.
+
+### Testing Notebooks
+- Currently can run ```nbdev_test_nbs('MyMod.ipynb')``` to run all of the tests contained in the ```MyMod.ipynb``` notebook. 
+- Tests are identified by either omitting any export flags (```//export```) or by including special flags defined in ```settings.ini``` (i.e ```//slowtest``` or ```chiseltest```).
+
+### settings.ini
+- Configurations belong in this file.
