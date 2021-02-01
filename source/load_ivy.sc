@@ -2,22 +2,38 @@ interp.repositories() ::: List(
   coursierapi.MavenRepository.of("https://oss.sonatype.org/content/repositories/snapshots")
 )
 
-@
-
+// We must compile to scala 2.11.12 due to a change in type inference between Scala 2.11 and 2.12. To remain compatible with Chisel3, just stick to 2.11
 interp.configureCompiler(x => x.settings.source.value = scala.tools.nsc.settings.ScalaVersion("2.11.12"))
 
-// Uncomment and change to use proxy
-// System.setProperty("https.proxyHost", "proxy.example.com")
-// System.setProperty("https.proxyPort", "3128")
 
-import $ivy.`edu.berkeley.cs::chisel3:3.2.0` 
+// Getting the newer chisel import versions are from this repo below
+//interp.repositories() ++= Seq(
+//  coursierapi.MavenRepository
+//    .of("https://maven.imagej.net/content/repositories/public/")
+//)
+
+// Select a chisel version
+import $ivy.`edu.berkeley.cs::chisel3:3.2.0`
+//import $ivy.`edu.berkeley.cs::chisel3:3.3.0`
+//import $ivy.`edu.berkeley.cs::chisel3:3.4.0` 
+
+// Add tester libraries
 import $ivy.`edu.berkeley.cs::chisel-iotesters:1.3.0`
 import $ivy.`edu.berkeley.cs::chisel-testers2:0.1.0`
+
+//import $ivy.`edu.berkeley.cs::chisel-iotesters:1.4.1+`
+//import $ivy.`edu.berkeley.cs::chiseltest:0.2.1+`
+//import $ivy.`edu.berkeley.cs::chiseltest:0.3.0`
+//import $ivy.`edu.berkeley.cs::chisel-testers2:0.1.0`
+//import $ivy.`edu.berkeley.cs::chisel-testers2:0.1-SNAPSHOT`
+
+
+// These are the imports for digrammer (requires the sonatype repo above)
 import $ivy.`edu.berkeley.cs::dsptools:1.2.0`
 import $ivy.`org.scalanlp::breeze:0.13.2`
 import $ivy.`edu.berkeley.cs::rocket-dsptools:1.2.0`
 import $ivy.`edu.berkeley.cs::firrtl-diagrammer:1.1.0`
-import $ivy.`com.lihaoyi::upickle:0.7.1`
+
 // Convenience function to invoke Chisel and grab emitted Verilog.
 def getVerilog(dut: => chisel3.core.UserModule): String = {
   import firrtl._
@@ -90,95 +106,4 @@ def stringifyAST(firrtlAST: firrtl.ir.Circuit): String = {
   buf.toString
 }
 
-// Returns path to module viz and hierarchy viz
-def generateVisualizations(gen: () => chisel3.RawModule): (String, String) = {
-    import dotvisualizer._
-    import dotvisualizer.transforms._
 
-    import java.io._
-    import firrtl._
-    import firrtl.annotations._
-
-    import almond.interpreter.api.DisplayData
-    import almond.api.helpers.Display
-
-    import chisel3._
-    import chisel3.experimental._
-    import firrtl.ir.Module
-    import sys.process._
-    
-    val targetDir = "build"
-    val chiselIR = chisel3.Driver.elaborate(gen)
-    val firrtlIR = chisel3.Driver.emit(chiselIR)
-    val config = Config(targetDir = "build", firrtlSource = firrtlIR)
-  
-    val sourceFirrtl = {
-      if(config.firrtlSource.nonEmpty) {
-        config.firrtlSource
-      }
-      else {
-        scala.io.Source.fromFile(config.firrtlSourceFile).getLines().mkString("\n")
-      }
-    }
-
-    val ast = Parser.parse(sourceFirrtl)
-    val uniqueTop = ast.main + ast.hashCode().toHexString
-    val cmdRegex = "cmd[0-9]+([A-Za-z]+.*)".r
-    val readableTop = ast.main match {
-      case cmdRegex(n) => n
-      case other => other
-    }
-    val newTop = readableTop
-    
-    val newModules: Seq[firrtl.ir.DefModule] = ast.modules.map {
-        case m: Module if m.name == ast.main => m.copy(name = newTop)
-        case other => other
-    }
-    
-    val newAst = ast.copy(main = newTop, modules = newModules)
-    
-    val controlAnnotations: Seq[Annotation] = config.toAnnotations
-
-    val loweredAst = ToLoFirrtl.lower(newAst)
-
-    FileUtils.makeDirectory(targetDir)
-
-    FirrtlDiagrammer.addCss(targetDir)
-
-    val circuitState = CircuitState(loweredAst, LowForm, controlAnnotations)
-
-    if(config.justTopLevel) {
-      val justTopLevelTransform = new ModuleLevelDiagrammer
-      justTopLevelTransform.execute(circuitState)
-    } else {
-      val x = new MakeDiagramGroup
-      x.execute(circuitState)
-    }
-
-    s"cp build/${readableTop}.dot.svg build/${uniqueTop}.dot.svg"!!
-
-    s"cp build/${readableTop}_hierarchy.dot.svg build/${uniqueTop}_hierarchy.dot.svg"!!
-    
-    val moduleView = targetDir + "/" + uniqueTop + ".dot.svg"
-    val x = """<a name="top"></a><img src=" """ + moduleView + """" alt="Module View";" />"""
-    
-    val instanceView = targetDir + "/" + uniqueTop + "_hierarchy.dot.svg"
-    val y = """<a name="top"></a><img src=" """ + instanceView + """" alt="Hierarchy View" style="width:480px;" />"""
-    (x, y)
-
-}
-
-
-def visualize(gen: () => chisel3.RawModule): Unit = {
-    val (moduleView, instanceView) = generateVisualizations(gen)
-    html(moduleView)
-
-}
-
-def visualizeHierarchy(gen: () => chisel3.RawModule): Unit = {
-    val (moduleView, instanceView) = generateVisualizations(gen)
-    html(instanceView)
-}
-
-
-val cool = 69
