@@ -2,7 +2,7 @@
 
 // Cell
 //default_exp test
-import $file.source.load_ivy
+import $file.^.source.load_ivy
 
 // Cell
 import chisel3.{Input => Input}
@@ -56,39 +56,4 @@ class Operator(op: String) extends ALUSkeleton {
         case "/" => io.out := this.div(io.a, io.b)
         case _ => io.out := 0.U
     }
-}
-
-// Cell
-test(new Operator(op="+")) { c =>
-    c.io.a.poke(5.U); c.io.b.poke(3.U)
-    c.io.out.expect(8.U)
-    println(c.io.out.peek())
-}
-
-
-test(new Operator(op="-")) { c =>
-    c.io.a.poke(5.U); c.io.b.poke(3.U)
-    c.io.out.expect(2.U)
-    println(c.io.out.peek())
-}
-
-
-test(new Operator(op="*")) { c =>
-    c.io.a.poke(5.U); c.io.b.poke(3.U)
-    c.io.out.expect(15.U)
-    println(c.io.out.peek())
-}
-
-
-test(new Operator(op="/")) { c =>
-    c.io.a.poke(5.U); c.io.b.poke(3.U)
-    c.io.out.expect(1.U)
-    println(c.io.out.peek())
-}
-
-
-test(new Operator(op="%")) { c =>
-    c.io.a.poke(5.U); c.io.b.poke(3.U)
-    c.io.out.expect(0.U)
-    println(c.io.out.peek())
 }

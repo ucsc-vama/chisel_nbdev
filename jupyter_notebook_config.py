@@ -1260,27 +1260,27 @@
 #  Default: 300
 # c.TerminalManager.cull_interval = 300
 
-from nbconvert import ScriptExporter
-from traitlets.config import Config
-from nbdev.export import read_nb
-import json
-import nbformat
-def export_scala_post_save(model, **kwargs):
-	name = model["name"]
-	path = model["path"]
+# from nbconvert import ScriptExporter
+# from traitlets.config import Config
+# from nbdev.export import read_nb
+# import json
+# import nbformat
+# def export_scala_post_save(model, **kwargs):
+# 	name = model["name"]
+# 	path = model["path"]
 
-	script_exporter = ScriptExporter()
-	nb = read_nb(path)
+# 	script_exporter = ScriptExporter()
+# 	nb = read_nb(path)
 
-	new_name = name.replace('.ipynb', '.sc')
-	dest = path.replace(name, new_name)
-	e = script_exporter.from_notebook_node(nb)
-	with open(dest, 'w', encoding='utf8') as f:
-		f.write(e[0])
+# 	new_name = name.replace('.ipynb', '.sc')
+# 	dest = path.replace(name, new_name)
+# 	e = script_exporter.from_notebook_node(nb)
+# 	with open(dest, 'w', encoding='utf8') as f:
+# 		f.write(e[0])
 
-	print(f'Done exporting {path} -> {dest}' )
+# 	print(f'Done exporting {path} -> {dest}' )
 	
-c.FileContentsManager.post_save_hook = export_scala_post_save
+# c.FileContentsManager.post_save_hook = export_scala_post_save
 
 
 

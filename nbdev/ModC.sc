@@ -28,5 +28,3 @@ class DoubleComposedMod extends Module {
 
     io.out := composed.io.out + io.in
 }
-
-println("success.")

@@ -15,19 +15,6 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}
 import chisel3.tester.RawTester.test
 
 // Cell
-test(new Add) { c =>
-    c.io.a.poke(1.U)
-    c.io.b.poke(2.U)
-    c.clock.step(1)
-    c.io.out.expect(3.U)
-
-    c.io.a.poke(5.U)
-    c.io.b.poke(2.U)
-    c.clock.step(1)
-    c.io.out.expect(7.U)
-}
-
-// Cell
 class ComposedModule extends Module {
     val io = IO(new Bundle {
         val a = Input(UInt(4.W))
@@ -39,19 +26,4 @@ class ComposedModule extends Module {
     addr.io.a := io.a
     addr.io.b := io.b
     io.out := addr.io.out + io.c
-}
-
-// Cell
-test(new ComposedModule) { c =>
-    c.io.a.poke(1.U)
-    c.io.b.poke(2.U)
-    c.io.c.poke(3.U)
-    c.clock.step(1)
-    c.io.out.expect(6.U)
-
-    c.io.a.poke(5.U)
-    c.io.b.poke(2.U)
-    c.io.c.poke(7.U)
-    c.clock.step(1)
-    c.io.out.expect(14.U)
 }
