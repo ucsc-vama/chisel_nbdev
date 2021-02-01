@@ -342,3 +342,5 @@ hs_err_pid*
 .metals/
 project/metals.sbt
 *.ipynb_checkpoints/
+nbs/test_run_dir/
+nbdev/test_run_dir/
