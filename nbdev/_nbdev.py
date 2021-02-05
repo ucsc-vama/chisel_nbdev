@@ -2,9 +2,10 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"Add": "test.ipynb",
+index = {"Add": "ToImport.ipynb",
          "ComposedModule": "import_chisel_mod.ipynb",
          "DoubleComposedMod": "import_composed_mod.ipynb",
+         "test.Add": "test.ipynb",
          "ALUSkeleton": "test.ipynb",
          "add": "test.ipynb",
          "Sub": "test.ipynb",
