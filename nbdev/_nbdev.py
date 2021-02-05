@@ -5,7 +5,6 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 index = {"Add": "test.ipynb",
          "ComposedModule": "import_chisel_mod.ipynb",
          "DoubleComposedMod": "import_composed_mod.ipynb",
-         "ALUIO": "test.ipynb",
          "ALUSkeleton": "test.ipynb",
          "add": "test.ipynb",
          "Sub": "test.ipynb",
@@ -18,13 +17,15 @@ index = {"Add": "test.ipynb",
          "includeMulDiv": "test.ipynb",
          "Operator": "test.ipynb",
          "FuncFromTest": "test.ipynb",
-         "FuncToNewScript": "test.ipynb"}
+         "FuncToNewScript": "test.ipynb",
+         "FuncToNewScript2": "test.ipynb"}
 
 modules = ["ModA.sc",
            "ModB.sc",
            "ModC.sc",
            "test.sc",
-           "NewScript.sc"]
+           "NewScript.sc",
+           "NewScript2.sc"]
 
 doc_url = "tbd/"
 

@@ -13,10 +13,14 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}
 import chisel3.tester.RawTester.test
 
 // Cell
-class ALUIO extends Bundle {
+// Chisel Code: Declare a new module definition
+class Add extends Module {
+  val io = IO(new Bundle {
     val a = Input(UInt(4.W))
     val b = Input(UInt(4.W))
     val out = Output(UInt(4.W))
+  })
+  io.out := io.a + io.b
 }
 
 // Cell
@@ -37,6 +41,7 @@ println("changed auto-gen file")
 
 // Cell
 class MulDiv(m: ALUSkeleton) {
+    println("changed auto-gen file")
     def mul(a: UInt, b: UInt): UInt = a * b
     def div(a: UInt, b: UInt): UInt = a / b
 }
@@ -49,7 +54,6 @@ implicit def includeMulDiv(m: ALUSkeleton) = new MulDiv(m)
 // Cell
 // This Operator module perform 1 type of operation depending on 'op' parameter
 class Operator(op: String) extends ALUSkeleton {
-    println("changed auto-gen file")
     op match {
         // Call on the implicit function
         case "+" => io.out := this.add(io.a, io.b)
