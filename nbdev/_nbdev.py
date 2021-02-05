@@ -17,7 +17,6 @@ index = {"Add": "ToImport.ipynb",
          "includeSub": "test.ipynb",
          "includeMulDiv": "test.ipynb",
          "Operator": "test.ipynb",
-         "FuncFromTest": "test.ipynb",
          "FuncToNewScript": "test.ipynb",
          "FuncToNewScript2": "test.ipynb"}
 

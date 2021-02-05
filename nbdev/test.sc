@@ -21,6 +21,7 @@ class Add extends Module {
     val out = Output(UInt(4.W))
   })
   io.out := io.a + io.b
+  print("edited this from test.sc")
 }
 
 // Cell
