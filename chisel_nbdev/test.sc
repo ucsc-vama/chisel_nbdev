@@ -64,3 +64,6 @@ class Operator(op: String) extends ALUSkeleton {
         case _ => io.out := 0.U
     }
 }
+
+// Cell
+object TestObj {}
