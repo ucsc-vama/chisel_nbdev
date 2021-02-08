@@ -55,3 +55,6 @@ class Operator(op: String) extends ALUSkeleton {
 
 // Cell
 object TestObj {}
+
+// Cell
+abstract class LotsOfParams(a: Int, b: List[(Int, Int)], c: BigInt)

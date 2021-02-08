@@ -19,7 +19,8 @@ index = {"Add": "ToImport.ipynb",
          "Operator": "test.ipynb",
          "FuncToNewScript": "test.ipynb",
          "FuncToNewScript2": "test.ipynb",
-         "TestObj": "test.ipynb"}
+         "TestObj": "test.ipynb",
+         "LotsOfParams": "test.ipynb"}
 
 modules = ["ModA.sc",
            "ModB.sc",
