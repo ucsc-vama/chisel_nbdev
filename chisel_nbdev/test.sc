@@ -13,18 +13,6 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}
 import chisel3.tester.RawTester.test
 
 // Cell
-// Chisel Code: Declare a new module definition
-class Add extends Module {
-  val io = IO(new Bundle {
-    val a = Input(UInt(4.W))
-    val b = Input(UInt(4.W))
-    val out = Output(UInt(4.W))
-  })
-  io.out := io.a + io.b
-  print("edited this from test.sc")
-}
-
-// Cell
 class ALUSkeleton extends Module {
     val io = IO(new ALUIO)
 }
