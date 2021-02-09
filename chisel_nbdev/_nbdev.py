@@ -29,7 +29,7 @@ modules = ["ModA.sc",
            "NewScript.sc",
            "NewScript2.sc"]
 
-doc_url = "tbd/"
+doc_url = "https://ucsc-vama.github.io/chisel-nbdev//"
 
 git_url = "https://github.com/ucsc-vama/chisel-nbdev"
 

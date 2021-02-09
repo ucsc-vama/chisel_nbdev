@@ -2,6 +2,7 @@
 
 // Cell
 //default_exp ModA
+//default_cls_lvl 3
 
 // Cell
 import $file.^.source.load_ivy
@@ -13,7 +14,6 @@ import chisel3.util._
 import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}
 
 // Cell
-// Chisel Code: Declare a new module definition
 class Add extends Module {
   val io = IO(new Bundle {
     val a = Input(UInt(4.W))
