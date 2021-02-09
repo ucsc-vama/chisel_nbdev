@@ -10,39 +10,15 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: Tutorial
-      url: tutorial.html
+      title: Creating a basic Chisel module to be imported by other files.
+      url: ToImport.html
     - output: web,pdf
-      title: A minimal example
-      url: example.html
+      title: Title
+      url: import_composed_mod.html
     - output: web,pdf
-      title: Export to modules
-      url: export.html
-    - output: web,pdf
-      title: Synchronize and diff
-      url: sync.html
-    - output: web,pdf
-      title: Show doc
-      url: showdoc.html
-    - output: web,pdf
-      title: Convert to html
-      url: export2html.html
-    - output: web,pdf
-      title: Extract tests
+      title: Test Chisel notebook
       url: test.html
-    - output: web,pdf
-      title: Fix merge conflicts
-      url: merge.html
-    - output: web,pdf
-      title: Command line functions
-      url: cli.html
-    - output: web,pdf
-      title: Clean notebooks
-      url: clean.html
-    - output: web,pdf
-      title: Setting up Search
-      url: search.html
     output: web
-    title: nbdev
+    title: chisel-nbdev
   output: web
   title: Sidebar

@@ -1,8 +1,14 @@
 # chisel-nbdev
+> The goal of this repo is to provide a seamless way to develop Chisel code in a Jupyter Notebook environment.
 
-The goal of this repo is to provide a seamless way to develop Chisel code in a Jupyter Notebook environment.
 
 ## Requirements (mac)
+- setup some virtualenv (im using python3.8.2)
+- ```pip install virtualenv```
+- find your python3 binary: ```which python3``` which for me is ```/usr/local/bin/python3```
+- create virtualenv: ```python3 -m virtualenv --python=/usr/local/bin/python3 chisel_nb_env```
+- activate it: ```source chisel_nb_env/bin/activate```
+- install jupyterlab (which includes jupyter notebook): ```pip install jupyterlab```## Requirements (mac)
 - setup some virtualenv (im using python3.8.2)
 - ```pip install virtualenv```
 - find your python3 binary: ```which python3``` which for me is ```/usr/local/bin/python3```
