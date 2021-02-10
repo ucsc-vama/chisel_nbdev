@@ -13,7 +13,11 @@ entries:
       title: Creating a basic Chisel module to be imported by other files.
       url: ToImport.html
     - output: web,pdf
-      title: Title
+      title: Import the module we defined in ToImport.ipynb renamed to -> ModA.sc
+      url: import_chisel_mod.html
+    - output: web,pdf
+      title: Import the module we defined in import_chisel_mod.ipynb renamed to ->
+        ModB.sc
       url: import_composed_mod.html
     - output: web,pdf
       title: Test Chisel notebook

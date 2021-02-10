@@ -10,29 +10,38 @@ import chisel3._
 import chisel3.util._
 import chisel3.tester._
 import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}
-import chisel3.tester.RawTester.test
+import chisel3.tester.RawTester.{test => Test}
 
 // Cell
-class ALUSkeleton extends Module {
-    val io = IO(new ALUIO)
+class ALUIO(width: Int) extends Bundle {
+    val a = Input(SInt(width.W))
+    val b = Input(SInt(width.W))
+    val out = Output(SInt())
+
+    override def cloneType = new ALUIO(width).asInstanceOf[this.type]
+}
+
+// Cell
+class ALUSkeleton(width: Int) extends Module {
+    val io = IO(new ALUIO(width))
 }
 
 // Cell
 class Add(m: ALUSkeleton) {
-    def add(a: UInt, b: UInt): UInt = a + b
+    def add(a: SInt, b: SInt): SInt = a +& b
 }
 
 // Cell
 class Sub(m: ALUSkeleton) {
-    def sub(a: UInt, b: UInt): UInt = a - b
+    def sub(a: SInt, b: SInt): SInt = a -& b
 }
 println("changed auto-gen file")
 
 // Cell
 class MulDiv(m: ALUSkeleton) {
     println("changed auto-gen file")
-    def mul(a: UInt, b: UInt): UInt = a * b
-    def div(a: UInt, b: UInt): UInt = a / b
+    def mul(a: SInt, b: SInt): SInt = a * b
+    def div(a: SInt, b: SInt): SInt = a / b
 }
 
 // Cell
@@ -41,17 +50,39 @@ implicit def includeSub(m: ALUSkeleton) = new Sub(m)
 implicit def includeMulDiv(m: ALUSkeleton) = new MulDiv(m)
 
 // Cell
-// This Operator module perform 1 type of operation depending on 'op' parameter
-class Operator(op: String) extends ALUSkeleton {
+/** This Operator module performs 1 type of operation depending on 'op' parameter */
+class Operator(op: String, width: Int) extends ALUSkeleton(width) {
     op match {
         // Call on the implicit function
         case "+" => io.out := this.add(io.a, io.b)
         case "-" => io.out := this.sub(io.a, io.b)
         case "*" => io.out := this.mul(io.a, io.b)
         case "/" => io.out := this.div(io.a, io.b)
-        case _ => io.out := 0.U
+        case _ => io.out := 0.S
     }
 }
+
+// Cell
+class OperatorTester(c: Operator, op: String, width: Int) extends PeekPokeTester(c) {
+  // 100 random tests
+  val cycles = 10
+  import scala.util.Random
+  import scala.math.min
+  for (i <- 0 until cycles) {
+    val in_a = Random.nextInt(1 << (width - 1))
+    val in_b = Random.nextInt(1 << (width - 1))
+    poke(c.io.a, in_a)
+    poke(c.io.b, in_b)
+    val exp = op match {
+        case "+" => in_a + in_b
+        case "-" => in_a - in_b
+        case "*" => in_a * in_b
+        case "/" => in_a / in_b
+    }
+//     println(s"$in_a $op $in_b = $exp")
+    expect(c.io.out, exp)
+    }
+  }
 
 // Cell
 object TestObj {}

@@ -6,8 +6,8 @@ title: Test Chisel notebook
 keywords: chisel
 sidebar: home_sidebar
 
-
-
+summary: "An example that defines a module over multiple notebook cells."
+description: "An example that defines a module over multiple notebook cells."
 nb_path: "nbs/test.ipynb"
 ---
 <!--
@@ -31,7 +31,9 @@ nb_path: "nbs/test.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>import $file.^.source.load_ivy</p>
+<p>We must first import our Chisel dependencies:</p>
+<div class="highlight"><pre><span></span><span class="k">import</span> <span class="nn">$file.</span><span class="o">^.</span><span class="n">source</span><span class="o">.</span><span class="n">load_ivy</span>
+</pre></div>
 
 </div>
 </div>
@@ -58,7 +60,7 @@ nb_path: "nbs/test.ipynb"
 </span>
 <span class="ansi-green-fg">import </span><span class="ansi-cyan-fg">chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}
 </span>
-<span class="ansi-green-fg">import </span><span class="ansi-cyan-fg">chisel3.tester.RawTester.test</span></pre>
+<span class="ansi-green-fg">import </span><span class="ansi-cyan-fg">chisel3.tester.RawTester.{test =&gt; Test}</span></pre>
 </div>
 
 </div>
@@ -71,43 +73,57 @@ nb_path: "nbs/test.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>import chisel3.{Input =&gt; Input}
-import chisel3.<em>
-import chisel3.util.</em>
-import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
+<h3 id="define-the-IO">define the IO<a class="anchor-link" href="#define-the-IO"> </a></h3><blockquote><p>If we define our IO as a standalone bundle we are able to reuse it for other modules</p>
+</blockquote>
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="define-the-IO">define the IO<a class="anchor-link" href="#define-the-IO"> </a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="a-skeleton-module-will-be-parent-class-of-all-of-our-methods">a skeleton module will be parent class of all of our methods<a class="anchor-link" href="#a-skeleton-module-will-be-parent-class-of-all-of-our-methods"> </a></h3>
 </div>
 </div>
 </div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">ALUIO</span> <span class="n">extends</span> <span class="n">Bundle</span> <span class="p">{</span>
-    <span class="n">val</span> <span class="n">a</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mf">4.</span><span class="n">W</span><span class="p">))</span>
-    <span class="n">val</span> <span class="n">b</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mf">4.</span><span class="n">W</span><span class="p">))</span>
-    <span class="n">val</span> <span class="n">out</span> <span class="o">=</span> <span class="n">Output</span><span class="p">(</span><span class="n">UInt</span><span class="p">(</span><span class="mf">4.</span><span class="n">W</span><span class="p">))</span>
-<span class="p">}</span>
-</pre></div>
+<div class="output_wrapper">
+<div class="output">
 
-    </div>
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>ALUIO
+</pre>
 </div>
 </div>
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb">ALUIO (GitHub)</a></p>
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="ALUIO" class="doc_header"><code>ALUIO</code><a href="None" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ALUIO</code>(<strong><code>width</code>:<code>Int</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
 <div class="output">
@@ -128,6 +144,14 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="A-skeleton-module-will-be-parent-class-of-all-of-our-methods">A skeleton module will be parent class of all of our methods<a class="anchor-link" href="#A-skeleton-module-will-be-parent-class-of-all-of-our-methods"> </a></h3><blockquote><p>This module currently has only IO defined. We will use Scala implicits to inject functionality into it.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -147,7 +171,7 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#a-skeleton-module-will-be-parent-class-of-all-of-our-methods">ALUSkeleton (GitHub)</a></p>
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb">ALUSkeleton (GitHub)</a></p>
 
 </div>
 
@@ -157,7 +181,9 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ALUSkeleton" class="doc_header"><code>ALUSkeleton</code><a href="None" class="source_link" style="float:right">[source]</a></h2>
+<h2 id="ALUSkeleton" class="doc_header"><code>ALUSkeleton</code><a href="None" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ALUSkeleton</code>(<strong><code>width</code>:<code>Int</code></strong>)</p>
+</blockquote>
+
 </div>
 
 </div>
@@ -193,7 +219,11 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="the-add-method-from-Add-class-will-be-injected-into-the-ALUSkeleton-class">the add method from Add class will be injected into the ALUSkeleton class<a class="anchor-link" href="#the-add-method-from-Add-class-will-be-injected-into-the-ALUSkeleton-class"> </a></h3>
+<h3 id="The-add-method-from-Add-class-will-be-injected-into-the-ALUSkeleton-class">The add method from Add class will be injected into the ALUSkeleton class<a class="anchor-link" href="#The-add-method-from-Add-class-will-be-injected-into-the-ALUSkeleton-class"> </a></h3><blockquote><p>This syntax will be used to inject the <code>[`add`](/test.html#add)</code> method into our skeleton module:<code>Scalaclass Add(m: ALUSkeleton) {
+    def add(a: SInt, b: SInt): SInt = a +&amp; b
+}</code></p>
+</blockquote>
+
 </div>
 </div>
 </div>
@@ -256,7 +286,7 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#the-add-method-from-Add-class-will-be-injected-into-the-ALUSkeleton-class">add (GitHub)</a></p>
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb">add (GitHub)</a></p>
 
 </div>
 
@@ -302,6 +332,13 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Similarly we can define a <a href="/test.html#sub"><code>sub</code></a> method that will be added</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -321,7 +358,7 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#the-add-method-from-Add-class-will-be-injected-into-the-ALUSkeleton-class">Sub (GitHub)</a></p>
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb">Sub (GitHub)</a></p>
 
 </div>
 
@@ -363,7 +400,7 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#the-add-method-from-Add-class-will-be-injected-into-the-ALUSkeleton-class">sub (GitHub)</a></p>
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb">sub (GitHub)</a></p>
 
 </div>
 
@@ -419,7 +456,9 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Here-multiple-methods-will-be-injected">Here multiple methods will be injected<a class="anchor-link" href="#Here-multiple-methods-will-be-injected"> </a></h3>
+<h3 id="Here-multiple-methods-will-be-injected">Here multiple methods will be injected<a class="anchor-link" href="#Here-multiple-methods-will-be-injected"> </a></h3><blockquote><p>Both <a href="/test.html#mul"><code>mul</code></a> and <a href="/test.html#div"><code>div</code></a> will be injected.</p>
+</blockquote>
+
 </div>
 </div>
 </div>
@@ -442,7 +481,7 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#Here-multiple-methods-will-be-injected">MulDiv (GitHub)</a></p>
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb">MulDiv (GitHub)</a></p>
 
 </div>
 
@@ -484,7 +523,7 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#Here-multiple-methods-will-be-injected">mul (GitHub)</a></p>
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb">mul (GitHub)</a></p>
 
 </div>
 
@@ -526,7 +565,7 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#Here-multiple-methods-will-be-injected">div (GitHub)</a></p>
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb">div (GitHub)</a></p>
 
 </div>
 
@@ -574,7 +613,8 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="implicit-def-call-will-add-the-methods-of-the-RHS-classes-to-the-implicit-def-parameter:-ALUSkeleton-class.">implicit def call will add the methods of the RHS classes to the implicit def parameter: ALUSkeleton class.<a class="anchor-link" href="#implicit-def-call-will-add-the-methods-of-the-RHS-classes-to-the-implicit-def-parameter:-ALUSkeleton-class."> </a></h3><p>Note the name <code>[`includeAdd`](/test.html#includeAdd)</code> does not matter as it won't be called again, but is good practice to give it a clear name of what it is doing (i.e includAdd &lt;=&gt; include the Add class' methods)</p>
+<h3 id="Adding-the-methods-to-our-skeleton-module:">Adding the methods to our skeleton module:<a class="anchor-link" href="#Adding-the-methods-to-our-skeleton-module:"> </a></h3><blockquote><p>implicit def call will add the methods of the RHS classes to the implicit def parameter:ALUSkeleton class.Note the name <code>[`includeAdd`](/test.html#includeAdd)</code> does not matter as it won't be called again, but is good practice to give it a clear name of what it is doing (i.e includAdd &lt;=&gt; include the Add class' methods)</p>
+</blockquote>
 
 </div>
 </div>
@@ -598,7 +638,7 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#Here-multiple-methods-will-be-injected">includeAdd (GitHub)</a></p>
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb">includeAdd (GitHub)</a></p>
 
 </div>
 
@@ -640,7 +680,7 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#Here-multiple-methods-will-be-injected">includeSub (GitHub)</a></p>
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb">includeSub (GitHub)</a></p>
 
 </div>
 
@@ -682,7 +722,7 @@ import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#Here-multiple-methods-will-be-injected">includeMulDiv (GitHub)</a></p>
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb">includeMulDiv (GitHub)</a></p>
 
 </div>
 
@@ -756,7 +796,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">i
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#Here-multiple-methods-will-be-injected">Operator (GitHub)</a></p>
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb">Operator (GitHub)</a></p>
 
 </div>
 
@@ -766,7 +806,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">i
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Operator" class="doc_header"><code>Operator</code><a href="None" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Operator</code>(<strong><code>op</code>:<code>String</code></strong>)</p>
+<h2 id="Operator" class="doc_header"><code>Operator</code><a href="None" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Operator</code>(<strong><code>op</code>:<code>String</code></strong>,<strong><code>width</code>:<code>Int) extends ALUSkeleton(width</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -804,7 +844,8 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">i
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Summary">Summary<a class="anchor-link" href="#Summary"> </a></h3><p>While this includes a few more steps than simply implementing everything directly into an Operator module, it can actually save some headaches when building much larger moudules. The best case for developing this way is if you're defining a specific arithmetic implmentation, which this example was meant to outline. For example a multiplier may require many sub methods to implement, and these implementation details can be hidden from the module using it. Also working like this puts you in the mindset of pulling out independent pieces of logic to write functions for that can later be reused in other modules.</p>
+<h3 id="Summary">Summary<a class="anchor-link" href="#Summary"> </a></h3><blockquote><p>While this includes a few more steps than simply implementing everything directly into an Operator module, it can actually save some headaches when building much larger moudules. The best case for developing this way is if you're defining a specific arithmetic implmentation, which this example was meant to outline. For example a multiplier may require many sub methods to implement, and these implementation details can be hidden from the module using it. Also working like this puts you in the mindset of pulling out independent pieces of logic to write functions for that can later be reused in other modules.</p>
+</blockquote>
 
 </div>
 </div>
@@ -812,48 +853,6 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">i
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span><span class="p">(</span><span class="n">new</span> <span class="n">Operator</span><span class="p">(</span><span class="n">op</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">))</span> <span class="p">{</span> <span class="n">c</span> <span class="o">=&gt;</span>
-    <span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">poke</span><span class="p">(</span><span class="mf">5.</span><span class="n">U</span><span class="p">);</span> <span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">poke</span><span class="p">(</span><span class="mf">3.</span><span class="n">U</span><span class="p">)</span>
-    <span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="mf">8.</span><span class="n">U</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">peek</span><span class="p">())</span>
-<span class="p">}</span>
-
-
-<span class="n">test</span><span class="p">(</span><span class="n">new</span> <span class="n">Operator</span><span class="p">(</span><span class="n">op</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">))</span> <span class="p">{</span> <span class="n">c</span> <span class="o">=&gt;</span>
-    <span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">poke</span><span class="p">(</span><span class="mf">5.</span><span class="n">U</span><span class="p">);</span> <span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">poke</span><span class="p">(</span><span class="mf">3.</span><span class="n">U</span><span class="p">)</span>
-    <span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="mf">2.</span><span class="n">U</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">peek</span><span class="p">())</span>
-<span class="p">}</span>
-
-
-<span class="n">test</span><span class="p">(</span><span class="n">new</span> <span class="n">Operator</span><span class="p">(</span><span class="n">op</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">))</span> <span class="p">{</span> <span class="n">c</span> <span class="o">=&gt;</span>
-    <span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">poke</span><span class="p">(</span><span class="mf">5.</span><span class="n">U</span><span class="p">);</span> <span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">poke</span><span class="p">(</span><span class="mf">3.</span><span class="n">U</span><span class="p">)</span>
-    <span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="mf">15.</span><span class="n">U</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">peek</span><span class="p">())</span>
-<span class="p">}</span>
-
-
-<span class="n">test</span><span class="p">(</span><span class="n">new</span> <span class="n">Operator</span><span class="p">(</span><span class="n">op</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">))</span> <span class="p">{</span> <span class="n">c</span> <span class="o">=&gt;</span>
-    <span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">poke</span><span class="p">(</span><span class="mf">5.</span><span class="n">U</span><span class="p">);</span> <span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">poke</span><span class="p">(</span><span class="mf">3.</span><span class="n">U</span><span class="p">)</span>
-    <span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="mf">1.</span><span class="n">U</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">peek</span><span class="p">())</span>
-<span class="p">}</span>
-
-
-<span class="n">test</span><span class="p">(</span><span class="n">new</span> <span class="n">Operator</span><span class="p">(</span><span class="n">op</span><span class="o">=</span><span class="s2">&quot;%&quot;</span><span class="p">))</span> <span class="p">{</span> <span class="n">c</span> <span class="o">=&gt;</span>
-    <span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">poke</span><span class="p">(</span><span class="mf">5.</span><span class="n">U</span><span class="p">);</span> <span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">poke</span><span class="p">(</span><span class="mf">3.</span><span class="n">U</span><span class="p">)</span>
-    <span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="mf">0.</span><span class="n">U</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">peek</span><span class="p">())</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -861,35 +860,53 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">i
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[<span class="ansi-magenta-fg">info</span>] [0.001] Elaborating design...
-[<span class="ansi-magenta-fg">info</span>] [1.150] Done elaborating.
-file loaded in 0.039787833 seconds, 7 symbols, 3 statements
-UInt&lt;4&gt;(8)
-test Operator Success: 0 tests passed in 2 cycles in 0.069959 seconds 28.59 Hz
-[<span class="ansi-magenta-fg">info</span>] [0.000] Elaborating design...
-[<span class="ansi-magenta-fg">info</span>] [0.144] Done elaborating.
-file loaded in 0.018328542 seconds, 7 symbols, 3 statements
-UInt&lt;4&gt;(2)
-test Operator Success: 0 tests passed in 2 cycles in 0.041654 seconds 48.01 Hz
-[<span class="ansi-magenta-fg">info</span>] [0.000] Elaborating design...
-changed auto-gen file
-[<span class="ansi-magenta-fg">info</span>] [0.131] Done elaborating.
-file loaded in 0.007217875 seconds, 7 symbols, 3 statements
-UInt&lt;4&gt;(15)
-test Operator Success: 0 tests passed in 2 cycles in 0.036090 seconds 55.42 Hz
-[<span class="ansi-magenta-fg">info</span>] [0.001] Elaborating design...
-changed auto-gen file
-[<span class="ansi-magenta-fg">info</span>] [0.150] Done elaborating.
-file loaded in 0.018015459 seconds, 6 symbols, 2 statements
-UInt&lt;4&gt;(1)
-test Operator Success: 0 tests passed in 2 cycles in 0.005991 seconds 333.82 Hz
-[<span class="ansi-magenta-fg">info</span>] [0.001] Elaborating design...
-[<span class="ansi-magenta-fg">info</span>] [0.106] Done elaborating.
-file loaded in 0.005967667 seconds, 6 symbols, 2 statements
-UInt&lt;4&gt;(0)
-test Operator Success: 0 tests passed in 2 cycles in 0.007314 seconds 273.44 Hz
+<pre>OperatorTester
 </pre>
 </div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb">OperatorTester (GitHub)</a></p>
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="OperatorTester" class="doc_header"><code>OperatorTester</code><a href="None" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>OperatorTester</code>(<strong><code>c</code>:<code>Operator</code></strong>,<strong><code>op</code>:<code>String</code></strong>,<strong><code>width</code>:<code>Int) extends PeekPokeTester(c</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Tester</span></pre>
+</div>
+
 </div>
 
 </div>
@@ -900,14 +917,7 @@ test Operator Success: 0 tests passed in 2 cycles in 0.007314 seconds 273.44 Hz
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Export-the-file-to-.sc">Export the file to .sc<a class="anchor-link" href="#Export-the-file-to-.sc"> </a></h3><ul>
-<li>File -&gt; Export Notebook As... -&gt; Executable Script</li>
-<li>Move into same directory as your other chisel notebooks</li>
-<li>This will create a file ToImport.scala</li>
-<li>Rename it to ToImport.sc</li>
-<li>Can now import using <code>import $file.ToImport</code></li>
-</ul>
-
+<h3 id="Some-test-funcs/classes/objects-to-be-exported-from-this-notebook:">Some test funcs/classes/objects to be exported from this notebook:<a class="anchor-link" href="#Some-test-funcs/classes/objects-to-be-exported-from-this-notebook:"> </a></h3>
 </div>
 </div>
 </div>
@@ -930,7 +940,7 @@ test Operator Success: 0 tests passed in 2 cycles in 0.007314 seconds 273.44 Hz
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#Here-multiple-methods-will-be-injected">FuncToNewScript (GitHub)</a></p>
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#Some-test-funcs/classes/objects-to-be-exported-from-this-notebook:">FuncToNewScript (GitHub)</a></p>
 
 </div>
 
@@ -957,22 +967,6 @@ test Operator Success: 0 tests passed in 2 cycles in 0.007314 seconds 273.44 Hz
     
 <div class="cell border-box-sizing code_cell rendered">
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">FuncToNewScript</span></pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -995,7 +989,7 @@ test Operator Success: 0 tests passed in 2 cycles in 0.007314 seconds 273.44 Hz
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#Here-multiple-methods-will-be-injected">FuncToNewScript2 (GitHub)</a></p>
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#Some-test-funcs/classes/objects-to-be-exported-from-this-notebook:">FuncToNewScript2 (GitHub)</a></p>
 
 </div>
 
@@ -1022,22 +1016,6 @@ test Operator Success: 0 tests passed in 2 cycles in 0.007314 seconds 273.44 Hz
     
 <div class="cell border-box-sizing code_cell rendered">
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">FuncToNewScript2</span></pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -1060,7 +1038,7 @@ test Operator Success: 0 tests passed in 2 cycles in 0.007314 seconds 273.44 Hz
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#Here-multiple-methods-will-be-injected">TestObj (GitHub)</a></p>
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#Some-test-funcs/classes/objects-to-be-exported-from-this-notebook:">TestObj (GitHub)</a></p>
 
 </div>
 
@@ -1085,22 +1063,6 @@ test Operator Success: 0 tests passed in 2 cycles in 0.007314 seconds 273.44 Hz
     
 <div class="cell border-box-sizing code_cell rendered">
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>defined <span class="ansi-green-fg">object</span> <span class="ansi-cyan-fg">TestObj</span></pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -1123,7 +1085,7 @@ test Operator Success: 0 tests passed in 2 cycles in 0.007314 seconds 273.44 Hz
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#Here-multiple-methods-will-be-injected">LotsOfParams (GitHub)</a></p>
+<p><a href="https://nbviewer.jupyter.org/github/ucsc-vama/chisel-nbdevnbs/test.ipynb#Some-test-funcs/classes/objects-to-be-exported-from-this-notebook:">LotsOfParams (GitHub)</a></p>
 
 </div>
 
@@ -1149,22 +1111,6 @@ test Operator Success: 0 tests passed in 2 cycles in 0.007314 seconds 273.44 Hz
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">LotsOfParams</span></pre>
-</div>
-
-</div>
-
-</div>
-</div>
 
 </div>
     {% endraw %}
