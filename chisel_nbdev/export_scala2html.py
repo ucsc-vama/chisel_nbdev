@@ -286,7 +286,7 @@ def nb_code_cell(source):
 # SCRIPT_DIR = os.path.dirname(os.getcwd()) + '/chisel_nbdev'
 # sys.path.append(os.path.normpath(SCRIPT_DIR))
 # """
-_import_str = """from showdoc import show_doc\n"""
+_import_str = """from chisel_nbdev.showdoc import show_doc\n"""
 
 # Cell
 def _show_doc_cell(name, cls_lvl=None):

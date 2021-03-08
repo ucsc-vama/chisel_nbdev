@@ -1,9 +1,9 @@
 {
-  "chisel-nbdev": {
+  "chisel_nbdev": {
     "Overview": "/",
-    "Creating a basic Chisel module to be imported by other files.": "ToImport.html",
-    "Import the module we defined in ToImport.ipynb renamed to -> ModA.sc": "import_chisel_mod.html",
-    "Import the module we defined in import_chisel_mod.ipynb renamed to -> ModB.sc": "import_composed_mod.html",
-    "Test Chisel notebook": "test.html"
+    "ToImport": "ToImport.html",
+    "import_chisel_mod": "import_chisel_mod.html",
+    "import_composed_mod": "import_composed_mod.html",
+    "test": "test.html"
   }
 }

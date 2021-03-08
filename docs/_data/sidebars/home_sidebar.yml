@@ -10,19 +10,18 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: Creating a basic Chisel module to be imported by other files.
+      title: ToImport
       url: ToImport.html
     - output: web,pdf
-      title: Import the module we defined in ToImport.ipynb renamed to -> ModA.sc
+      title: import_chisel_mod
       url: import_chisel_mod.html
     - output: web,pdf
-      title: Import the module we defined in import_chisel_mod.ipynb renamed to ->
-        ModB.sc
+      title: import_composed_mod
       url: import_composed_mod.html
     - output: web,pdf
-      title: Test Chisel notebook
+      title: test
       url: test.html
     output: web
-    title: chisel-nbdev
+    title: chisel_nbdev
   output: web
   title: Sidebar
