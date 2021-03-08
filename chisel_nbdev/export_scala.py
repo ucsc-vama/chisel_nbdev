@@ -19,10 +19,11 @@ def read_nb(fname):
 
 # Cell
 def is_scala_nb(fname):
-    kernel = read_nb(fname)['metadata']['kernelspec']
-    is_scala = kernel['language'] == 'scala'
-#     print(f'{fname} is {"" if is_scala else "not"} a scala notebook')
-    return is_scala
+    try:
+        kernel = read_nb(fname)['metadata']['kernelspec']
+        return kernel['language'] == 'scala'
+    except KeyError:
+        return False
 
 # Cell
 def check_re(cell, pat, code_only=True):
