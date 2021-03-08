@@ -111,9 +111,9 @@ _re_class_func_def = re.compile(r"""
 # Catches any function or class or trait or case class or object definition
 (?:abstract\s+class|case\s+class|class|object|trait|sealed\s+trait|implicit\s+def|def)  # Non-catching group for def or class
 \s+            # One whitespace or more
-([^\(\s]+)     # Catching group with any character except an opening parenthesis or a whitespace (name)
+([^\(\s\[]*)     # Catching group with any character except an opening parenthesis or a whitespace (name) or a left brace for type parameter
 \s*            # Any number of whitespace
-(?:\(|:|{|extends)       # Non-catching group with either an opening parenthesis or a : (classes don't need ())
+(?:\(|:|{|extends|\[)       # Non-catching group with either an opening parenthesis or a : (classes don't need ())
 """, re.MULTILINE | re.VERBOSE)
 
 # Cell
