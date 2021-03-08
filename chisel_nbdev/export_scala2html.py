@@ -430,6 +430,7 @@ def execute_nb(nb, mod=None, metadata=None, show_doc_only=True):
     nb['cells'].insert(0, _import_show_doc_cell(mods))
     ep_cls = ExecuteShowDocPreprocessor if show_doc_only else ExecutePreprocessor
     ep = ep_cls(timeout=600, kernel_name='python3')
+#     ep = ep_cls(timeout=600, kernel_name='scala')
     metadata = metadata or {}
     pnb = nbformat.from_dict(nb)
     ep.preprocess(pnb, metadata)
@@ -752,4 +753,11 @@ def make_sidebar():
 #################################################
 # Instead edit {'../../sidebar.json'}
 """+res_s
+    filename = cfg.path("doc_path")/'_data/sidebars/home_sidebar.yml'
+    if not os.path.exists(os.path.dirname(filename)):
+        try:
+            os.makedirs(os.path.dirname(filename))
+        except OSError as exc: # Guard against race condition
+            if exc.errno != errno.EEXIST:
+                raise
     open(cfg.path("doc_path")/'_data/sidebars/home_sidebar.yml', 'w').write(res_s)
