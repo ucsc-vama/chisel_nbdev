@@ -1,6 +1,14 @@
 {
   "chisel_nbdev": {
     "Overview": "/",
+    "Export to scala sbt project ": "export_scala.html",
+    "Synchronize and diff": "sync_scala.html",
+    "show_scaladoc": "show_scaladoc.html",
+    "Convert to html": "export_scala2html.html",
+    "Extract tests": "test_scala.html",
+    "Fix merge conflicts": "merge.html",
+    "Command line functions": "cli.html",
+    "Clean notebooks": "clean_scala.html",
     "Creating a basic Chisel module to be imported by other files.": "ToImport.html",
     "Import the module we defined in ToImport.ipynb renamed to -> ModA.sc": "import_chisel_mod.html",
     "Import the module we defined in import_chisel_mod.ipynb renamed to -> ModB.sc": "import_composed_mod.html",

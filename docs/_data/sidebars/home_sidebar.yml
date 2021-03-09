@@ -10,6 +10,30 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
+      title: 'Export to scala sbt project '
+      url: export_scala.html
+    - output: web,pdf
+      title: Synchronize and diff
+      url: sync_scala.html
+    - output: web,pdf
+      title: show_scaladoc
+      url: show_scaladoc.html
+    - output: web,pdf
+      title: Convert to html
+      url: export_scala2html.html
+    - output: web,pdf
+      title: Extract tests
+      url: test_scala.html
+    - output: web,pdf
+      title: Fix merge conflicts
+      url: merge.html
+    - output: web,pdf
+      title: Command line functions
+      url: cli.html
+    - output: web,pdf
+      title: Clean notebooks
+      url: clean_scala.html
+    - output: web,pdf
       title: Creating a basic Chisel module to be imported by other files.
       url: ToImport.html
     - output: web,pdf

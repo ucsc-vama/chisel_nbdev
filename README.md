@@ -9,12 +9,6 @@
 - create virtualenv: ```python3 -m virtualenv --python=/usr/local/bin/python3 chisel_nb_env```
 - activate it: ```source chisel_nb_env/bin/activate```
 - install jupyterlab (which includes jupyter notebook): ```pip install jupyterlab```## Requirements (mac)
-- setup some virtualenv (im using python3.8.2)
-- ```pip install virtualenv```
-- find your python3 binary: ```which python3``` which for me is ```/usr/local/bin/python3```
-- create virtualenv: ```python3 -m virtualenv --python=/usr/local/bin/python3 chisel_nb_env```
-- activate it: ```source chisel_nb_env/bin/activate```
-- install jupyterlab (which includes jupyter notebook): ```pip install jupyterlab```
 
 ### Setup the Jupyter Scala kernel Almond (https://almond.sh) 
 - Borrowed from the Chisel-Bootcamp install guide: https://github.com/freechipsproject/chisel-bootcamp/blob/master/Install.md
