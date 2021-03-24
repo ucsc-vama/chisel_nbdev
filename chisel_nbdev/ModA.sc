@@ -2,6 +2,7 @@
 
 // Cell
 //default_exp ModA
+//package ComposedExample
 //default_cls_lvl 3
 
 // Cell

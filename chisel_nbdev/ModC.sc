@@ -2,6 +2,7 @@
 
 // Cell
 //default_exp ModC
+//package ComposedExample
 
 // Cell
 import $file.^.nbdev.ModB, ModB._

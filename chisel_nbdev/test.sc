@@ -2,6 +2,7 @@
 
 // Cell
 //default_exp test
+//package Examples
 import $file.^.source.load_ivy
 
 // Cell
@@ -89,3 +90,8 @@ object TestObj {}
 
 // Cell
 abstract class LotsOfParams(a: Int, b: List[(Int, Int)], c: BigInt)
+
+// Cell
+def testTypeParams[T](a: T): List[T] = {
+    List.fill(5)(a)
+}
